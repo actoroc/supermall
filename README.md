@@ -1,5 +1,5 @@
 # supermall
-#防购物app
+#仿购物app
 ```
 用vue尝试做一个购物app
 ```
