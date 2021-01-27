@@ -1,10 +1,10 @@
 import Vue from 'vue'
 import VueRouter from 'vue-router'
 
-const home = ()=>import('views/Home/Home.vue')
-const sort = ()=>import('views/Sort/Sort.vue')
-const cart = ()=>import('views/Cart/Cart.vue')
-const file = ()=>import('views/File/File.vue')
+const home = ()=>import('../views/Home/Home.vue')
+const sort = ()=>import('../views/Sort/Sort.vue')
+const cart = ()=>import('../views/Cart/Cart.vue')
+const file = ()=>import('../views/File/File.vue')
 
 Vue.use(VueRouter)
  
