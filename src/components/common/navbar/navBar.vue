@@ -28,7 +28,7 @@
   #center {
     text-align: center;
     flex: 1;
-    color: white;
+ 
   }
 }
 </style>

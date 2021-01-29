@@ -27,9 +27,9 @@ export default {
   methods: {
     itemFun() {
       if (this.path != "/file") {
-        this.$router.push(this.path);
+        this.$router.replace(this.path);
       } else {
-        this.$router.push(`${this.path}/zhangsan`);
+        this.$router.replace(`${this.path}/zhangsan`);
       }
     },
   },

@@ -164,6 +164,7 @@ export default {
   background: #ee9595;
   font-size: 1.3rem;
   z-index: 2;
+  color: #fff;
 }
 .tab-control-faker {
   position: relative;

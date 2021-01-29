@@ -1,15 +1,17 @@
-*{
-    list-style-type: none;
-    text-decoration: none;
-    box-sizing: border-box;
+* {
+  list-style-type: none;
+  text-decoration: none;
+  box-sizing: border-box;
 }
 :root {
-font-size: 14px;
+  font-size: 14px;
 }
-body{
-    padding: 0;
-    margin: 0;
+body {
+  padding: 0;
+  margin: 0;
+  font-family: 'Helvetica Neue', Helvetica, 'PingFang SC', 'Hiragino Sans GB',
+    'Microsoft YaHei', Arial, sans-serif;
 }
-a{
-    color: #555;
+a {
+  color: #555;
 }

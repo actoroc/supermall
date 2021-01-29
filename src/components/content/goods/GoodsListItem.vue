@@ -1,9 +1,9 @@
 <template>
   <div class="goods-list-item">
-    <a :href="goodsItem.link">
+    <div @click="itemLink">
       <img :src="goodsItem.show.img" alt="" @load="imgLoad"/>
       <p class="title">{{ goodsItem.title }}</p>
-    </a>
+    </div>
     <span class="price">{{ goodsItem.price }}</span>
     <span class="star" @click="starItem" :class="{ active: isActive }">
       <i class="far fa-star"></i
@@ -39,6 +39,9 @@ export default {
     },
     imgLoad(){
       this.$bus.$emit('itemImgLoad')
+    },
+    itemLink(){
+      this.$router.push(`detail/${this.goodsItem.iid}`)
     }
   },
 };
