@@ -1,5 +1,8 @@
 # supermall
 
+```
+用vue尝试做一个购物app
+```
 ## Project setup
 ```
 npm install
