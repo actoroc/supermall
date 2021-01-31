@@ -1,5 +1,4 @@
 <template>
-  <div class="detail-nav-bar">
     <nav-bar>
       <div slot="left" class="left" @click="backClick">
         <i class="fas fa-chevron-left"></i>
@@ -16,7 +15,6 @@
         </div>
       </div>
     </nav-bar>
-  </div>
 </template>
 
 <script>
@@ -35,6 +33,7 @@ export default {
   methods: {
     titleClick(index) {
       this.currentIndex = index;
+      this.$emit('titleClick',index)
     },
     backClick() {
       this.$router.back();

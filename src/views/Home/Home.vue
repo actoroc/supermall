@@ -36,13 +36,13 @@ import recommendView from "./childitem/recommendView";
 
 import navBar from "components/common/navbar/navBar";
 import scroll from "components/common/scroll/Scroll";
-import backTop from "components/common/backtop/backTop";
+
 
 import TabControl from "components/content/tabcontrol/TabControl";
 import GoodsList from "components/content/goods/GoodsList";
 
 import { getHomeMultiData, getHomeGoods } from "network/home";
-import { debounce } from "common/utils";
+import { itemListenerMixin ,backTopMixin} from "common/mixin";
 
 export default {
   name: "home",
@@ -54,12 +54,12 @@ export default {
     /*common组件*/
     navBar,
     scroll,
-    backTop,
 
     /*content组件*/
     TabControl,
     GoodsList,
   },
+  mixins: [itemListenerMixin,backTopMixin],
   data() {
     return {
       banners: [],
@@ -80,7 +80,6 @@ export default {
       },
       transmit: "pop",
       isLoaded: false,
-      isShowBackTop: false,
       tabcontrolShow: false,
       tabOffsetTop: 0,
       saveLocation: 0,
@@ -129,36 +128,29 @@ export default {
     pullup() {
       this.getHomeGoods(this.transmit);
     },
-    backtop() {
-      this.$refs.scroll.scrollTo(0, 0, 500);
-    },
+
     isShowBackTopFun(position) {
-      this.isShowBackTop = -position.y > 800;
+      this.showBack(position);
       this.tabcontrolShow = -position.y > this.tabOffsetTop;
     },
     swiperLoad() {
       this.tabOffsetTop = this.$refs.tabcontrol2.$el.offsetTop;
     },
   },
-  mounted() {
-    const refresh = debounce(this.$refs.scroll.refresh, 50);
-    this.$bus.$on("itemImgLoad", () => {
-      refresh();
-    });
-  },
   activated() {
-    this.$refs.scroll.scrollTo(0,this.saveLocation);
+    this.$refs.scroll.scrollTo(0, this.saveLocation);
     this.$refs.scroll.refresh();
   },
   deactivated() {
     this.saveLocation = this.$refs.scroll.scroll.y;
+    this.$bus.$off("itemImgLoad", this.itemImgListener);
   },
 };
 </script>
 <style lang="less" scoped>
 .home {
-  // position: relative;
   padding-top: 44px;
+  height: 100vh;
 }
 .home-nav {
   background: #ee9595;
@@ -172,10 +164,7 @@ export default {
   background: #fff;
 }
 .wrapper {
-  position: absolute;
-  top: 44px;
-  bottom: 49px;
-  left: 0px;
-  right: 0px;
+  position: relative;
+  height: calc( 100% - 44px );
 }
 </style>

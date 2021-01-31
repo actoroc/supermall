@@ -1,7 +1,7 @@
 <template>
   <div class="goods-list-item">
     <div @click="itemLink">
-      <img :src="goodsItem.show.img" alt="" @load="imgLoad"/>
+      <img :src="showImages" alt="" @load="imgLoad" />
       <p class="title">{{ goodsItem.title }}</p>
     </div>
     <span class="price">{{ goodsItem.price }}</span>
@@ -20,6 +20,11 @@ export default {
       isActive: false,
     };
   },
+  computed: {
+    showImages() {
+      return this.goodsItem.image || this.goodsItem.show.img;
+    },
+  },
   props: {
     goodsItem: {
       type: Object,
@@ -37,12 +42,12 @@ export default {
         this.goodsItem.cfav = this.goodsItem.cfav * 1 - 1;
       }
     },
-    imgLoad(){
-      this.$bus.$emit('itemImgLoad')
+    imgLoad() {
+      this.$bus.$emit("itemImgLoad");
     },
-    itemLink(){
-      this.$router.push(`detail/${this.goodsItem.iid}`)
-    }
+    itemLink() {
+      this.$router.push(`detail/${this.goodsItem.iid}`);
+    },
   },
 };
 </script>
@@ -65,7 +70,7 @@ export default {
   }
   img {
     width: 100%;
-    height: 80%;
+    height: 256px;
     border-radius: 5px;
   }
   .price {

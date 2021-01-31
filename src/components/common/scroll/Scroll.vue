@@ -64,6 +64,7 @@ export default {
       if (this.probeType == 3 || this.probeType == 2) {
         this.scroll.on("scroll", (position) => {
           this.$emit("scroll", position);
+          
         });
       }
       if (this.pullUpLoad) {
@@ -77,7 +78,7 @@ export default {
       // 代理better-scroll的refresh方法
       this.scroll && this.scroll.refresh();
     },
-     finishPullUp() {
+    finishPullUp() {
       // 代理better-scroll的refresh方法
       this.scroll && this.scroll.finishPullUp();
     },

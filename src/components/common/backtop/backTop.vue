@@ -1,7 +1,7 @@
 <template>
   <div class="backtop">
     <i class="fas fa-chevron-up"></i>
-    <div>top</div>
+    <div>顶部</div>
   </div>
 </template>
 
@@ -19,7 +19,6 @@ export default {
   text-align: center;
   width: 40px;
   height: 40px;
-//   border: solid 1px #ddd;
   border-radius: 50%;
   font-size: 0.8rem;
   color: #888;
@@ -29,10 +28,12 @@ export default {
   background: #fff;
   box-shadow:  0px 0px 40px 1px rgba(100,100,100,0.5);
   i {
-    margin-top: 6px;
+    font-size: 1.2rem;
+    margin-top: 4px;
   }
   div {
-    margin-top: -5px;
+    margin-top: -2px;
+    font-size: .3rem;
   }
 }
 </style>

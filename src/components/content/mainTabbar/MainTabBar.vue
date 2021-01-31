@@ -1,5 +1,4 @@
 <template>
-  <div class="main-tab-bar">
       <tab-bar>
         <tab-bar-item path="/home">
         <i class="fas fa-home icon" slot="icon"></i>
@@ -18,7 +17,6 @@
         <span slot="nav">我的</span>
       </tab-bar-item>
       </tab-bar>
-  </div>
 </template>
 
 <script>
