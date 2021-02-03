@@ -1,4 +1,5 @@
 import { request } from './request';
+//详情页的axios接口
 export function getDetail(iid) {
   return request({
     url: '/detail',
@@ -12,6 +13,7 @@ export function getRecommend() {
     url:'/recommend'
   })
 }
+//用类Goods接受数据方便组件传参
 export class Goods {
   constructor(itemInfo, columns, services) {
       this.title = itemInfo.title;
@@ -21,10 +23,10 @@ export class Goods {
       this.discount = itemInfo.discountDesc;
       this.realPrice = itemInfo.lowNowPrice;
       this.columns = columns;
-      this.services = services;
-     
+      this.services = services;   
   }
 }
+////Shop接受数据方便组件传参
 export class Shop {
     constructor(shopInfo) {
         this.logo = shopInfo.shopLogo;

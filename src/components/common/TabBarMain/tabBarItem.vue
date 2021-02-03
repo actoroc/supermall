@@ -9,28 +9,30 @@
 <script>
 export default {
   name: "item",
-  computed: {
-    isActive() {
-      return this.$route.path.indexOf(this.path) !== -1;
-    },
-    isActiveColor() {
-      return this.isActive ? {color : this.activeColor} : {}
-    }
-  },
   props: {
     path: String,
     activeColor: {
-      type : String,
-      default: 'pink',
-    }
+      type: String,
+      default: "pink",
+    },
+  },
+  computed: {
+    isActive() {
+      //如果当前组件传进来的path和当前路由的路径一致就返回true；
+
+      return this.$route.path.indexOf(this.path) !== -1;
+    },
+    isActiveColor() {
+      //根据isActive（）返回的结果给template对应的el动态赋值style
+      return this.isActive ? { color: this.activeColor } : {};
+    },
   },
   methods: {
     itemFun() {
-      if (this.path != "/file") {
-        this.$router.replace(this.path);
-      } else {
-        this.$router.replace(`${this.path}/zhangsan`);
-      }
+      //点击转到相应的路由，路径是file则带上id
+      this.path !== "/file"
+        ? this.$router.replace(this.path)
+        : this.$router.replace(`${this.path}/zhangsan`);
     },
   },
 };

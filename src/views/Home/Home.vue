@@ -59,6 +59,7 @@ export default {
     TabControl,
     GoodsList,
   },
+  //混入
   mixins: [itemListenerMixin,backTopMixin],
   data() {
     return {
@@ -86,6 +87,7 @@ export default {
     };
   },
   created() {
+    //请求数据
     this.getHomeMultiData();
     this.getHomeGoods("pop");
     this.getHomeGoods("new");
@@ -108,6 +110,8 @@ export default {
       });
     },
     /*事件监听*/
+
+    //根据index 请求对应的数据
     tabItemClick(index) {
       switch (index) {
         case 0:
@@ -125,22 +129,26 @@ export default {
       this.$refs.tabcontrol1.dindex = index;
       this.$refs.tabcontrol2.dindex = index;
     },
+    //上拉加载更多
     pullup() {
       this.getHomeGoods(this.transmit);
     },
-
+    //backTop是否显示
     isShowBackTopFun(position) {
       this.showBack(position);
       this.tabcontrolShow = -position.y > this.tabOffsetTop;
     },
+    //轮播图加载监听
     swiperLoad() {
       this.tabOffsetTop = this.$refs.tabcontrol2.$el.offsetTop;
     },
   },
+  //回到离开前位置
   activated() {
     this.$refs.scroll.scrollTo(0, this.saveLocation);
     this.$refs.scroll.refresh();
   },
+  //记录离开的位置和注销事件总线
   deactivated() {
     this.saveLocation = this.$refs.scroll.scroll.y;
     this.$bus.$off("itemImgLoad", this.itemImgListener);
@@ -165,6 +173,6 @@ export default {
 }
 .wrapper {
   position: relative;
-  height: calc( 100% - 44px );
+  height: calc( 100% - 49px);
 }
 </style>

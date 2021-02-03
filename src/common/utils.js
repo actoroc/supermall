@@ -1,4 +1,5 @@
 export function debounce(func, delay) {
+  //防抖函数封装
   let timer = null;
   return function(...args) {
     if (timer) clearTimeout(timer);
@@ -7,6 +8,8 @@ export function debounce(func, delay) {
     }, delay);
   };
 }
+
+//日期转换函数封装
 export function parseTime(time, cFormat) {
   if (arguments.length === 0) {
     return null;

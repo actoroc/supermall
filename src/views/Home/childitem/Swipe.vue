@@ -1,9 +1,10 @@
 <template>
   <div class="swipe">
     <mt-swipe :auto="4000">
-      <mt-swipe-item v-for="(item,index) in banners" :key="index"
-        ><a :href="item.link"><img :src="item.image" alt="" @load="imgload"
-      /></a></mt-swipe-item>
+      <mt-swipe-item v-for="(item, index) in banners" :key="index"
+        ><a :href="item.link"
+          ><img :src="item.image" alt="" @load="imgload" /></a
+      ></mt-swipe-item>
     </mt-swipe>
   </div>
 </template>
@@ -13,8 +14,8 @@ import "mint-ui/lib/style.css";
 export default {
   data() {
     return {
-      isLoad:false,
-    }
+      isLoad: false,
+    };
   },
   props: {
     banners: {
@@ -25,12 +26,13 @@ export default {
     },
   },
   methods: {
-    imgload(){
+    //监听图片加载
+    imgload() {
       if (!this.isLoad) {
-        this.$emit('imgLoad');
-        this.isLoad = true
+        this.$emit("imgLoad");
+        this.isLoad = true;
       }
-    }
+    },
   },
 };
 </script>

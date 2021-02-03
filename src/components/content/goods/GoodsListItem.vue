@@ -20,11 +20,6 @@ export default {
       isActive: false,
     };
   },
-  computed: {
-    showImages() {
-      return this.goodsItem.image || this.goodsItem.show.img;
-    },
-  },
   props: {
     goodsItem: {
       type: Object,
@@ -33,7 +28,14 @@ export default {
       },
     },
   },
+  computed: {
+    showImages() {
+      //组件复用，有可能路径不一，可以用短路运算符解决
+      return this.goodsItem.image || this.goodsItem.show.img;
+    },
+  },
   methods: {
+    // 点击收藏样式
     starItem() {
       this.isActive = !this.isActive;
       if (this.isActive) {
@@ -42,9 +44,11 @@ export default {
         this.goodsItem.cfav = this.goodsItem.cfav * 1 - 1;
       }
     },
+    //通过事件总线跨组件通讯
     imgLoad() {
       this.$bus.$emit("itemImgLoad");
     },
+    //路由转跳到详情页
     itemLink() {
       this.$router.push(`detail/${this.goodsItem.iid}`);
     },

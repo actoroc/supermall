@@ -61,12 +61,14 @@ export default {
         pullUpLoad: this.pullUpLoad,
       });
 
+      // 是否监听浏览器滚动
       if (this.probeType == 3 || this.probeType == 2) {
         this.scroll.on("scroll", (position) => {
           this.$emit("scroll", position);
-          
         });
       }
+
+      //是否启动上拉事件
       if (this.pullUpLoad) {
         this.scroll.on("pullingUp", () => {
           this.$emit("pullingUp");

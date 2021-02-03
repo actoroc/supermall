@@ -14,7 +14,7 @@ export default {
 .tabbar {
   height: 49px;
   border-top: solid 1px #ddd;
-  box-shadow: 0 -1px 5px rgba(0, 0, 0, 0.1);
+  box-shadow: 0 -.1px 1px rgba(0, 0, 0, 0.1);
   position: fixed;
   bottom: 0;
   left: 0;

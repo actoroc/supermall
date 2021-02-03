@@ -20,7 +20,7 @@
   left: 0;
   right: 0;
   top: 0;
-  // padding-bottom: 44px;
+
   #left,
   #right {
     width: 60px;

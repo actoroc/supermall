@@ -1,4 +1,6 @@
 import { debounce } from './utils';
+
+//图片加载后better-scroll重新计算可滚动高度refresh
 export const itemListenerMixin = {
   data() {
     return {
@@ -14,7 +16,10 @@ export const itemListenerMixin = {
     this.$bus.$on('itemImgLoad', this.itemImgListener);
   },
 };
+
+
 import backTop from 'components/common/backtop/backTop';
+//返回顶部
 export const backTopMixin = {
   components: {
     backTop,

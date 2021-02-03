@@ -54,6 +54,7 @@ export default {
     },
   },
   filters: {
+    //过滤值超过1w用万代替
     sellCountFilter(value) {
       if (value < 10000) {
         return value;

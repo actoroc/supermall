@@ -28,6 +28,7 @@ export default {
     },
   },
   methods: {
+    // 按钮切换，父组件根据index请求数据
     itemClick(index) {
       this.dindex = index;
       this.$emit('tabClick',index)

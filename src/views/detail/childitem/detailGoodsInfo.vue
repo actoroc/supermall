@@ -30,6 +30,7 @@ export default {
     return {};
   },
   methods: {
+    //监听图片加载
     imgload(){
       this.$emit('imagesLoad')
     }

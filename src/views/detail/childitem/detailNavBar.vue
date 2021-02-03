@@ -31,10 +31,12 @@ export default {
     };
   },
   methods: {
+    //top标题点击
     titleClick(index) {
       this.currentIndex = index;
       this.$emit('titleClick',index)
     },
+    //返回按钮
     backClick() {
       this.$router.back();
     },
