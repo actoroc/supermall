@@ -53,6 +53,7 @@ export default {
     //商品选中
     check() {
       this.product.check = !this.product.check;
+      this.$emit('itemClick');
     },
   },
 };

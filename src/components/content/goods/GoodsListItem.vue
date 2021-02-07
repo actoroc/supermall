@@ -4,7 +4,7 @@
       <img :src="showImages" alt="" @load="imgLoad" />
       <p class="title">{{ goodsItem.title }}</p>
     </div>
-    <span class="price">{{ goodsItem.price }}</span>
+    <span class="price">￥{{ goodsItem.price }}</span>
     <span class="star" @click="starItem" :class="{ active: isActive }">
       <i class="far fa-star"></i
       ><span class="collect">{{ goodsItem.cfav }}</span>
@@ -31,7 +31,9 @@ export default {
   computed: {
     showImages() {
       //组件复用，有可能路径不一，可以用短路运算符解决
-      return this.goodsItem.image || this.goodsItem.show.img;
+      return (
+        this.goodsItem.img || this.goodsItem.image || this.goodsItem.show.img
+      );
     },
   },
   methods: {
@@ -59,23 +61,32 @@ export default {
 <style lang='less' scoped>
 .goods-list-item {
   text-align: center;
-  width: 46%;
-  height: 319px;
-  padding-bottom: 5px;
+  // margin: 0 5px 10px 5px;
+  background: #fff;
+  overflow: hidden;
+  border-radius: 5px;
   .title {
+    // overflow: hidden;
+    // white-space: nowrap;
+    // text-overflow: ellipsis;
+    // font-size: 0.7rem;
+    text-overflow: -o-ellipsis-lastline;
     overflow: hidden;
-    white-space: nowrap;
     text-overflow: ellipsis;
-    font-size: 0.7rem;
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    line-clamp: 2;
+    -webkit-box-orient: vertical;
   }
   .fa-star {
     font-size: 0.9rem;
     padding-right: 2px;
   }
   img {
+    display: block;
     width: 100%;
-    height: 256px;
-    border-radius: 5px;
+    height: auto;
+    // border-radius: 5px;
   }
   .price {
     color: #eb596e;

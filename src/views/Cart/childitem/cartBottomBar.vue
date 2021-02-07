@@ -1,7 +1,7 @@
 <template>
   <div class="bottom-bar">
-    <div class="bottom-left" @click="checkAll">
-      <div class="check">
+    <div class="bottom-left">
+      <div class="check" @click="checkAll">
         <div class="circle">
           <i class="fas fa-check-circle" v-show="Allcheck"></i>
         </div>
@@ -53,6 +53,7 @@ export default {
   methods: {
     //购物车全选方法按钮
     checkAll() {
+      this.$bus.$emit("checkAll");
       let test = this.cartList.every((item) => item.check);
       if (test) {
         for (const item of this.cartList) {

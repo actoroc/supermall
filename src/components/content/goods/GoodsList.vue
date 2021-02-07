@@ -1,10 +1,15 @@
 <template>
   <div class="goods-list">
-    <goods-list-item
-      v-for="(item, index) in goods"
-      :key="index"
-      :goodsItem="item"
-    ></goods-list-item>
+    <waterfall :col="2" :data="goods">
+      <template>
+        <goods-list-item
+          v-for="(item, index) in goods"
+          :key="index"
+          :goodsItem="item"
+          class="goods-item"
+        ></goods-list-item>
+      </template>
+    </waterfall>
   </div>
 </template>
 
@@ -30,11 +35,15 @@ export default {
 </script>
 
 <style lang='less' scoped>
-.goods-list{
-    padding-top:5px;
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: space-around;
-    padding: 0 2px;
+.goods-list {
+  padding-top: 5px;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-around;
+  padding: 0 2px;
+  flex-direction: column;
+}
+.goods-item{
+  margin: 5px;
 }
 </style>

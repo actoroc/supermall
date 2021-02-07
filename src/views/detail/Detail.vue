@@ -155,7 +155,7 @@ export default {
         this.$toast.show({
           text: res,
           position: "center",
-          time: 5000,
+          time: 1500,
         });
       });
     },

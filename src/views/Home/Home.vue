@@ -7,9 +7,10 @@
       :titles="['流行', '新款', '精选']"
       class="tab-control-faker"
       @tabClick="tabItemClick"
+      @recordIndex="recordIndex"
       ref="tabcontrol1"
       v-show="tabcontrolShow"
-    ></tab-control>
+    />
     <scroll
       class="wrapper"
       :pullUpLoad="true"
@@ -18,16 +19,21 @@
       ref="scroll"
       @scroll="isShowBackTopFun"
     >
-      <swipe :banners="banners" @imgLoad="swiperLoad"></swipe>
-      <recommend-view :recommends="recommends"></recommend-view>
+      <swipe :banners="banners" @imgLoad="swiperLoad" />
+      <recommend-view :recommends="recommends" />
       <tab-control
         :titles="['流行', '新款', '精选']"
         @tabClick="tabItemClick"
+        @recordIndex="recordIndex"
         ref="tabcontrol2"
-      ></tab-control>
-      <goods-list :goods="goods[transmit].list"></goods-list>
+      />
+      <goods-list
+        :goods="goods[transmit].list"
+        class="goods-list"
+        ref="goodsList"
+      />
     </scroll>
-    <back-top @click.native="backtop" v-show="isShowBackTop"></back-top>
+    <back-top @click.native="backtop" v-show="isShowBackTop" />
   </div>
 </template>
 <script>
@@ -37,12 +43,11 @@ import recommendView from "./childitem/recommendView";
 import navBar from "components/common/navbar/navBar";
 import scroll from "components/common/scroll/Scroll";
 
-
 import TabControl from "components/content/tabcontrol/TabControl";
 import GoodsList from "components/content/goods/GoodsList";
 
 import { getHomeMultiData, getHomeGoods } from "network/home";
-import { itemListenerMixin ,backTopMixin} from "common/mixin";
+import { itemListenerMixin, backTopMixin, tabControlMixin } from "common/mixin";
 
 export default {
   name: "home",
@@ -60,7 +65,7 @@ export default {
     GoodsList,
   },
   //混入
-  mixins: [itemListenerMixin,backTopMixin],
+  mixins: [itemListenerMixin, backTopMixin, tabControlMixin],
   data() {
     return {
       banners: [],
@@ -79,11 +84,15 @@ export default {
           list: [],
         },
       },
-      transmit: "pop",
       isLoaded: false,
       tabcontrolShow: false,
       tabOffsetTop: 0,
       saveLocation: 0,
+      tabControlPosition: {
+        pop: 0,
+        new: 0,
+        sell: 0,
+      },
     };
   },
   created() {
@@ -113,19 +122,7 @@ export default {
 
     //根据index 请求对应的数据
     tabItemClick(index) {
-      switch (index) {
-        case 0:
-          this.transmit = "pop";
-          break;
-        case 1:
-          this.transmit = "new";
-          break;
-        case 2:
-          this.transmit = "sell";
-          break;
-        default:
-          break;
-      }
+      this.tabClick(index);
       this.$refs.tabcontrol1.dindex = index;
       this.$refs.tabcontrol2.dindex = index;
     },
@@ -141,6 +138,25 @@ export default {
     //轮播图加载监听
     swiperLoad() {
       this.tabOffsetTop = this.$refs.tabcontrol2.$el.offsetTop;
+      // 把goodsListoffsetTop赋值给记录tabControl的变量，来回切换记录当前位置
+      for (const key in this.tabControlPosition) {
+        this.tabControlPosition[key] = -this.$refs.goodsList.$el.offsetTop;
+      }
+    },
+    //watch 监听tabControl 值的变化并记录当前位置
+    recordIndex(odlVal) {
+      switch (odlVal) {
+        case 0:
+          this.oldTransmit = "pop";
+          break;
+        case 1:
+          this.oldTransmit = "new";
+          break;
+        case 2:
+          this.oldTransmit = "sell";
+          break;
+      }
+      this.tabControlPosition[this.oldTransmit] = this.$refs.scroll.scroll.y;
     },
   },
   //回到离开前位置
@@ -173,6 +189,10 @@ export default {
 }
 .wrapper {
   position: relative;
-  height: calc( 100% - 49px);
+  height: calc(100% - 49px);
+}
+.goods-list {
+  background: #f2f2f2;
+  z-index: 4;
 }
 </style>

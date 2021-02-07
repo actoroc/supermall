@@ -11,6 +11,9 @@ fastclick.attach(document.body);
 Vue.component(Swipe.name, Swipe);
 Vue.component(SwipeItem.name, SwipeItem);
 
+
+import waterfall from 'vue-waterfall2'
+Vue.use(waterfall)
 //自定义封装toast组件并注册
 import toast from 'components/common/Toast/toast';
 Vue.use(toast);

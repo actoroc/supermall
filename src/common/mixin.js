@@ -17,7 +17,6 @@ export const itemListenerMixin = {
   },
 };
 
-
 import backTop from 'components/common/backtop/backTop';
 //返回顶部
 export const backTopMixin = {
@@ -35,6 +34,44 @@ export const backTopMixin = {
     },
     showBack(position) {
       this.isShowBackTop = -position.y > 800;
+    },
+  },
+};
+export const tabControlMixin = {
+  data: function() {
+    return {
+      transmit: 'pop',
+      oldTransmit: '',
+    };
+  },
+  methods: {
+    tabClick(index) {
+      switch (index) {
+        case 0:
+          this.transmit = 'pop';
+          if (this.tabControlPosition) {
+            setTimeout(() => {
+              this.$refs.scroll.scrollTo(0, this.tabControlPosition['pop']);
+            }, 200);
+          }
+          break;
+        case 1:
+          this.transmit = 'new';
+          if (this.tabControlPosition) {
+            setTimeout(() => {
+              this.$refs.scroll.scrollTo(0, this.tabControlPosition['new']);
+            }, 200);
+          }
+          break;
+        case 2:
+          this.transmit = 'sell';
+          if (this.tabControlPosition) {
+            setTimeout(() => {
+              this.$refs.scroll.scrollTo(0, this.tabControlPosition['sell']);
+            }, 200);
+          }
+          break;
+      }
     },
   },
 };
