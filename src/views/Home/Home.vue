@@ -183,9 +183,10 @@ export default {
   color: #fff;
 }
 .tab-control-faker {
-  position: relative;
   z-index: 2;
   background: #fff;
+  position: absolute;
+  width: 100%;
 }
 .wrapper {
   position: relative;

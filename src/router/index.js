@@ -19,10 +19,7 @@ VueRouter.prototype.replace = function replace(location) {
 };
 
 const routes = [
-  {
-    path: '/',
-    redirect: '/home',
-  },
+ 
   {
     path: '/home',
     name: 'home',

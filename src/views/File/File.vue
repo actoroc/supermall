@@ -2,8 +2,7 @@
   <div id="profile">
     <nav-bar class="nav-bar"><div slot="center">仿蘑菇云商城</div></nav-bar>
     <!--1.单独封装一个组件: 利用slot知识点-->
-    <UserInfo></UserInfo>
-
+    <UserInfo />
     <!--2.没有单独封装: 不同的地方太多, 需要传过多的参数-->
     <section class="account">
       <div class="account-item">
