@@ -19,7 +19,10 @@ VueRouter.prototype.replace = function replace(location) {
 };
 
 const routes = [
- 
+  {
+    path: '/',
+    redirect: '/home',
+  },
   {
     path: '/home',
     name: 'home',
@@ -45,10 +48,11 @@ const routes = [
     name: 'detail',
     component: detail,
   },
+
 ];
 
 const router = new VueRouter({
-  mode: 'history',
+  mode: 'hash',
   base: process.env.BASE_URL,
   routes,
 });
