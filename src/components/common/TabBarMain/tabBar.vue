@@ -21,8 +21,6 @@ export default {
   right: 0;
   display: flex;
   background: #fff;
-  & :nth-last-child(1) {
-    border-right: none;
-  }
+  color: #888;
 }
 </style>

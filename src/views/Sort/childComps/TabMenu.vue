@@ -60,7 +60,7 @@ export default {
 .menu-wrapper {
   background-color: #f6f6f6;
   height: 100%;
-  width: 100px;
+  width: 25%;
   box-sizing: border-box;
 }
 

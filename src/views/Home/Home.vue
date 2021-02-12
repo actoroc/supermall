@@ -6,7 +6,7 @@
     <tab-control
       :titles="['流行', '新款', '精选']"
       class="tab-control-faker"
-      @tabClick="tabItemClick"
+      @tabClick="tabItemClick2"
       @recordIndex="recordIndex"
       ref="tabcontrol1"
       v-show="tabcontrolShow"
@@ -120,12 +120,6 @@ export default {
     },
     /*事件监听*/
 
-    //根据index 请求对应的数据
-    tabItemClick(index) {
-      this.tabClick(index);
-      this.$refs.tabcontrol1.dindex = index;
-      this.$refs.tabcontrol2.dindex = index;
-    },
     //上拉加载更多
     pullup() {
       this.getHomeGoods(this.transmit);
@@ -133,15 +127,21 @@ export default {
     //backTop是否显示
     isShowBackTopFun(position) {
       this.showBack(position);
-      this.tabcontrolShow = -position.y > this.tabOffsetTop;
+      this.tabcontrolShow = -position.y >= this.tabOffsetTop;
     },
     //轮播图加载监听
     swiperLoad() {
       this.tabOffsetTop = this.$refs.tabcontrol2.$el.offsetTop;
       // 把goodsListoffsetTop赋值给记录tabControl的变量，来回切换记录当前位置
       for (const key in this.tabControlPosition) {
-        this.tabControlPosition[key] = -this.$refs.goodsList.$el.offsetTop;
+        this.tabControlPosition[key] = -this.tabOffsetTop;
       }
+    },
+    //根据index 请求对应的数据
+    tabItemClick(index) {
+      this.tabClick(index);
+      this.$refs.tabcontrol1.dindex = index;
+      this.$refs.tabcontrol2.dindex = index;
     },
     //watch 监听tabControl 值的变化并记录当前位置
     recordIndex(odlVal) {
@@ -157,6 +157,39 @@ export default {
           break;
       }
       this.tabControlPosition[this.oldTransmit] = this.$refs.scroll.scroll.y;
+    },
+    tabItemClick2(index) {
+      switch (index) {
+        case 0:
+          this.transmit = "pop";
+          if (this.tabControlPosition) {
+            setTimeout(() => {
+              this.$refs.scroll.scrollTo(0, this.tabControlPosition["pop"]);
+              this.$refs.scroll.refresh();
+            }, 20);
+          }
+          break;
+        case 1:
+          this.transmit = "new";
+          if (this.tabControlPosition) {
+            setTimeout(() => {
+              this.$refs.scroll.scrollTo(0, this.tabControlPosition["new"]);
+              this.$refs.scroll.refresh();
+            }, 20);
+          }
+          break;
+        case 2:
+          this.transmit = "sell";
+          if (this.tabControlPosition) {
+            setTimeout(() => {
+              this.$refs.scroll.scrollTo(0, this.tabControlPosition["sell"]);
+              this.$refs.scroll.refresh();
+            }, 20);
+          }
+          break;
+      }
+      this.$refs.tabcontrol1.dindex = index;
+      this.$refs.tabcontrol2.dindex = index;
     },
   },
   //回到离开前位置

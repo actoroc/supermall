@@ -39,6 +39,7 @@ export default {
 </script>
 
 <style lang='less' scoped>
+
 .start {
   width: 20%;
   padding: 10px;

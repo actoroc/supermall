@@ -78,6 +78,7 @@ export default {
 
     refresh() {
       // 代理better-scroll的refresh方法
+  
       this.scroll && this.scroll.refresh();
     },
     finishPullUp() {

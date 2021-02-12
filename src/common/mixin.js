@@ -49,27 +49,12 @@ export const tabControlMixin = {
       switch (index) {
         case 0:
           this.transmit = 'pop';
-          if (this.tabControlPosition) {
-            setTimeout(() => {
-              this.$refs.scroll.scrollTo(0, this.tabControlPosition['pop']);
-            }, 200);
-          }
           break;
         case 1:
           this.transmit = 'new';
-          if (this.tabControlPosition) {
-            setTimeout(() => {
-              this.$refs.scroll.scrollTo(0, this.tabControlPosition['new']);
-            }, 200);
-          }
           break;
         case 2:
           this.transmit = 'sell';
-          if (this.tabControlPosition) {
-            setTimeout(() => {
-              this.$refs.scroll.scrollTo(0, this.tabControlPosition['sell']);
-            }, 200);
-          }
           break;
       }
     },

@@ -14,7 +14,7 @@
       <detail-goods-info :detailInfo="detailInfo" @imagesLoad="imagesLoad" />
       <detail-param-info :itemParams="itemParams" ref="param" />
       <detail-comment-info :commentInfo="commentInfo" ref="comment" />
-      <goods-list :goods="recommendInfo" ref="goods" />
+      <goods-list :goods="recommendInfo" ref="goods" class="detail-goods"/>
     </scroll>
     <detail-bottom-bar class="bottom-bar" @cartClick="cartClick" />
     <back-top @click.native="backtop" v-show="isShowBackTop" />
@@ -164,6 +164,9 @@ export default {
 </script>
 
 <style lang='less' scoped>
+.detail-goods{
+  background: #f2f2f2;
+}
 .detail {
   padding-top: 44px;
   position: relative;

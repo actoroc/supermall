@@ -14,7 +14,7 @@ export default {
     },
     hMargin: {
       type: Number,
-      default: 8,
+      default: 2,
     },
     vMargin: {
       type: Number,
@@ -45,7 +45,7 @@ export default {
       let children = gridEl.children;
 
       // 2.设置gridEl的内边距
-      gridEl.style.padding = `${this.vMargin}px ${this.hMargin}px`;
+      gridEl.style.padding = `${this.vMargin}px ${this.hMargin}px 0 0`;
 
       // 3.计算item的宽度
       let itemWidth =

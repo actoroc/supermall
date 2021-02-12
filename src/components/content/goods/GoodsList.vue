@@ -6,7 +6,7 @@
           v-for="(item, index) in goods"
           :key="index"
           :goodsItem="item"
-          class="goods-item"
+          class="home-goods"
         ></goods-list-item>
       </template>
     </waterfall>
@@ -36,14 +36,15 @@ export default {
 
 <style lang='less' scoped>
 .goods-list {
-  padding-top: 5px;
   display: flex;
   flex-wrap: wrap;
   justify-content: space-around;
   padding: 0 2px;
   flex-direction: column;
 }
-.goods-item{
-  margin: 5px;
+.home-goods{
+  margin: 0 4px 8px 4px;
+  // padding: 1px;
+  display: inline-block;
 }
 </style>

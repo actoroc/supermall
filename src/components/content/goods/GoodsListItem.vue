@@ -61,7 +61,6 @@ export default {
 <style lang='less' scoped>
 .goods-list-item {
   text-align: center;
-  // margin: 0 5px 10px 5px;
   background: #fff;
   overflow: hidden;
   border-radius: 5px;

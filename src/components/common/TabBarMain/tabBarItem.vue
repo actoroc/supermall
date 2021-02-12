@@ -42,7 +42,7 @@ export default {
 <style scoped lang="less">
 .item {
   height: 49px;
-  border-right: solid 1px #ddd;
+  // border-right: solid 1px #ddd;
   display: flex;
   flex: 1;
   flex-direction: column;
