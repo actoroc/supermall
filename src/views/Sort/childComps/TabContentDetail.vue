@@ -1,22 +1,22 @@
 <template>
-  <grid-view :cols="2"  class="grid-detail">
-    <goods-list-item
-      v-for="(item, index) in categoryDetail"
-      :key="index"
-      :goodsItem="item"
-      class="goods-item"
-    />
-  </grid-view>
+  <waterfall :col="2" :data="categoryDetail" @finish="finish">
+    <template>
+      <goods-list-item
+        v-for="(item, index) in categoryDetail"
+        :key="index"
+        :goodsItem="item"
+        class="goods-item"
+      />
+    </template>
+  </waterfall>
 </template>
 
 <script>
-import GridView from "components/common/gridView/GridView";
 import GoodsListItem from "components/content/goods/GoodsListItem";
 
 export default {
   name: "TabContentDetail",
   components: {
-    GridView,
     GoodsListItem,
   },
   props: {
@@ -27,12 +27,19 @@ export default {
       },
     },
   },
+  methods: {
+    finish() {
+      this.$emit("finish");
+    },
+  },
 };
 </script>
 
 <style scoped lang='less' >
-.grid-detail {
- background: #f2f2f2;
- font-size: .4rem;
+.goods-item {
+  background: #f2f2f2;
+  font-size: 0.4rem;
+  width: 114px;
+  margin: 0 4px 6px 4px;
 }
 </style>

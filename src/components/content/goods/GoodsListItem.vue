@@ -1,7 +1,7 @@
 <template>
-  <div class="goods-list-item">
-    <div @click="itemLink">
-      <img :src="showImages" alt="" @load="imgLoad" />
+  <div class="goods-list-item" >
+    <div @click="itemLink" class="divImg">
+      <img :lazy-src="showImages" v-if="showImages" @load="imgLoad" />
       <p class="title">{{ goodsItem.title }}</p>
     </div>
     <span class="price">￥{{ goodsItem.price }}</span>
@@ -48,7 +48,8 @@ export default {
     },
     //通过事件总线跨组件通讯
     imgLoad() {
-      this.$bus.$emit("itemImgLoad");
+     
+      // this.$bus.$emit("itemImgLoad");
     },
     //路由转跳到详情页
     itemLink() {
@@ -65,10 +66,6 @@ export default {
   overflow: hidden;
   border-radius: 5px;
   .title {
-    // overflow: hidden;
-    // white-space: nowrap;
-    // text-overflow: ellipsis;
-    // font-size: 0.7rem;
     text-overflow: -o-ellipsis-lastline;
     overflow: hidden;
     text-overflow: ellipsis;
@@ -81,11 +78,10 @@ export default {
     font-size: 0.9rem;
     padding-right: 2px;
   }
+  
   img {
     display: block;
-    width: 100%;
-    height: auto;
-    // border-radius: 5px;
+    width: 150px;
   }
   .price {
     color: #eb596e;

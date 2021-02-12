@@ -31,6 +31,7 @@
         :goods="goods[transmit].list"
         class="goods-list"
         ref="goodsList"
+        @finish="finish"
       />
     </scroll>
     <back-top @click.native="backtop" v-show="isShowBackTop" />
@@ -47,7 +48,8 @@ import TabControl from "components/content/tabcontrol/TabControl";
 import GoodsList from "components/content/goods/GoodsList";
 
 import { getHomeMultiData, getHomeGoods } from "network/home";
-import { itemListenerMixin, backTopMixin, tabControlMixin } from "common/mixin";
+import { backTopMixin, tabControlMixin } from "common/mixin";
+
 
 export default {
   name: "home",
@@ -65,7 +67,7 @@ export default {
     GoodsList,
   },
   //混入
-  mixins: [itemListenerMixin, backTopMixin, tabControlMixin],
+  mixins: [ backTopMixin, tabControlMixin],
   data() {
     return {
       banners: [],
@@ -102,6 +104,7 @@ export default {
     this.getHomeGoods("new");
     this.getHomeGoods("sell");
   },
+ 
   methods: {
     /*网络请求*/
     getHomeMultiData() {
@@ -115,7 +118,9 @@ export default {
       getHomeGoods(type, page).then((res) => {
         this.goods[type].list.push(...res.data.list);
         this.goods[type].page += 1;
-        this.$refs.scroll.finishPullUp();
+        setTimeout(() => {
+          this.$refs.scroll.finishPullUp();
+        }, 2000);
       });
     },
     /*事件监听*/
@@ -136,6 +141,9 @@ export default {
       for (const key in this.tabControlPosition) {
         this.tabControlPosition[key] = -this.tabOffsetTop;
       }
+    },
+    finish(){
+      this.$refs.scroll.refresh();
     },
     //根据index 请求对应的数据
     tabItemClick(index) {
@@ -192,15 +200,15 @@ export default {
       this.$refs.tabcontrol2.dindex = index;
     },
   },
+  mounted() {},
   //回到离开前位置
   activated() {
-    this.$refs.scroll.scrollTo(0, this.saveLocation);
     this.$refs.scroll.refresh();
+    this.$refs.scroll.scrollTo(0, this.saveLocation);
   },
   //记录离开的位置和注销事件总线
   deactivated() {
     this.saveLocation = this.$refs.scroll.scroll.y;
-    this.$bus.$off("itemImgLoad", this.itemImgListener);
   },
 };
 </script>

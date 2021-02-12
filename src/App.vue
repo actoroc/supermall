@@ -12,7 +12,6 @@ export default {
   components: {
     mainTabBar,
   },
-
 };
 </script>
 <style lang="less">

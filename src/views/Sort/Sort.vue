@@ -11,7 +11,7 @@
         <!-- :data="[categoryData]" -->
         <tab-content-category :subcategories="showSubcategory" />
         <tab-control :titles="['综合', '新品', '销量']" @tabClick="tabClick" />
-        <tab-content-detail :category-detail="showCategoryDetail" ref="contentDetail"/>
+        <tab-content-detail :category-detail="showCategoryDetail" ref="contentDetail" @finish="finish"/>
       </scroll>
     </div>
   </div>
@@ -72,6 +72,9 @@ export default {
     },
   },
   methods: {
+    finish(){
+      this.$refs.scroll.refresh();
+    },
     _getCategory() {
       getCategory().then((res) => {
         // 1.获取分类数据
@@ -118,6 +121,7 @@ export default {
      */
     selectItem(index) {
       this._getSubcategories(index);
+      this.$refs.scroll.scrollTo(0, 0);
     },
   },
 };

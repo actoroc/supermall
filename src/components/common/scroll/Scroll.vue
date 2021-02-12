@@ -30,10 +30,6 @@ export default {
     /**
      * 是否开启横向滚动
      */
-    timeout: {
-      type: Number,
-      default: 2000,
-    },
     // PullUp:{
     //   type: Boolean,
     //   dafault: true,
@@ -78,7 +74,7 @@ export default {
 
     refresh() {
       // 代理better-scroll的refresh方法
-  
+      // console.log('re');
       this.scroll && this.scroll.refresh();
     },
     finishPullUp() {

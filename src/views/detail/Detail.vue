@@ -1,20 +1,14 @@
 <template>
   <div class="detail">
     <detail-nav-bar class="detail-nav-bar" @titleClick="titleClick" ref="nav" />
-    <scroll
-      class="wrapper"
-      :pullUpLoad="true"
-      :probeType="3"
-      ref="scroll"
-      @scroll="positionShow"
-    >
+    <scroll class="wrapper" :probeType="3" ref="scroll" @scroll="positionShow">
       <swipe :topImages="topImages" />
       <detail-base-info :goods="goods" />
       <detail-shop-info :shop="shop" />
       <detail-goods-info :detailInfo="detailInfo" @imagesLoad="imagesLoad" />
       <detail-param-info :itemParams="itemParams" ref="param" />
       <detail-comment-info :commentInfo="commentInfo" ref="comment" />
-      <goods-list :goods="recommendInfo" ref="goods" class="detail-goods"/>
+      <goods-list :goods="recommendInfo" ref="goods" class="detail-goods" @finish="finish"/>
     </scroll>
     <detail-bottom-bar class="bottom-bar" @cartClick="cartClick" />
     <back-top @click.native="backtop" v-show="isShowBackTop" />
@@ -36,7 +30,7 @@ import detailBottomBar from "./childitem/detailBottomBar";
 //自己封装的防抖函数
 import { debounce } from "common/utils";
 import { getDetail, Goods, Shop, getRecommend } from "network/detail";
-import { itemListenerMixin, backTopMixin } from "common/mixin";
+import {  backTopMixin } from "common/mixin";
 
 export default {
   name: "Detail",
@@ -70,7 +64,7 @@ export default {
     };
   },
   //混入backTop组件和图片加载重新计算scroll的可滚动高度
-  mixins: [itemListenerMixin, backTopMixin],
+  mixins: [ backTopMixin],
   created() {
     //1.根据iid异步请求数据
     this.iid = this.$route.params.iid;
@@ -111,16 +105,16 @@ export default {
     });
   },
   //组件摧毁注销事件总线，防止组件复用相互影响
-  destroyed() {
-    this.$bus.$off("itemImgLoad", this.itemImgListener);
-  },
+
   methods: {
     //监听图片是否加载完
     imagesLoad() {
       //加载完刷新可滚动高度
-      this.newRefresh();
       //图片加载完可滚动高度正确，所以高度对应标题在这调用
       this.teemeTopYsFun();
+    },
+    finish(){
+         this.$refs.scroll.refresh();
     },
     //点击顶部标题滚动到对应的高度
     titleClick(index) {
@@ -164,7 +158,7 @@ export default {
 </script>
 
 <style lang='less' scoped>
-.detail-goods{
+.detail-goods {
   background: #f2f2f2;
 }
 .detail {
