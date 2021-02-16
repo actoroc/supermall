@@ -58,7 +58,6 @@ export default {
   },
   mounted() {
     this.$refs.img.style.width = this.offsetWidth / 2 + "px";
-    console.log(this.$refs.img.style.width, this.offsetWidth);
   },
 };
 </script>
