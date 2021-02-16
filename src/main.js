@@ -3,13 +3,14 @@ import App from './App.vue';
 import router from './router';
 import store from './store';
 //按需引入mint-ui 的轮播图功能
-import { Swipe, SwipeItem } from 'mint-ui';
+import { Swipe, SwipeItem ,Spinner } from 'mint-ui';
 //解决移动端300ms延迟，引入fastclick
 import fastclick from 'fastclick';
 fastclick.attach(document.body);
 //注册组件
 Vue.component(Swipe.name, Swipe);
 Vue.component(SwipeItem.name, SwipeItem);
+Vue.component(Spinner.name, Spinner);
 
 //引入瀑布流组件
 import waterfall from 'vue-waterfall2'

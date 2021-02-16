@@ -55,6 +55,8 @@ export default {
         probeType: this.probeType,
         click: this.click,
         pullUpLoad: this.pullUpLoad,
+        // momentum:false,
+        useTransition:false,
       });
 
       // 是否监听浏览器滚动

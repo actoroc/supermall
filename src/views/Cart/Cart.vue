@@ -1,6 +1,7 @@
 <template>
   <div class="cart">
     <cart-nav-bar />
+
     <cart-product ref="product"/>
     <cart-bottom-bar />
   </div>
