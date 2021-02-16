@@ -1,7 +1,7 @@
 <template>
-  <div class="goods-list-item" >
+  <div class="goods-list-item">
     <div @click="itemLink" class="divImg">
-      <img :lazy-src="showImages" v-if="showImages" @load="imgLoad" />
+      <img :lazy-src="showImages" v-if="showImages" @load="imgLoad" ref="img" />
       <p class="title">{{ goodsItem.title }}</p>
     </div>
     <span class="price">￥{{ goodsItem.price }}</span>
@@ -27,6 +27,7 @@ export default {
         return {};
       },
     },
+    offsetWidth: Number,
   },
   computed: {
     showImages() {
@@ -48,13 +49,16 @@ export default {
     },
     //通过事件总线跨组件通讯
     imgLoad() {
-     
       // this.$bus.$emit("itemImgLoad");
     },
     //路由转跳到详情页
     itemLink() {
       this.$router.push(`detail/${this.goodsItem.iid}`);
     },
+  },
+  mounted() {
+    this.$refs.img.style.width = this.offsetWidth / 2 + "px";
+    console.log(this.$refs.img.style.width, this.offsetWidth);
   },
 };
 </script>
@@ -78,10 +82,9 @@ export default {
     font-size: 0.9rem;
     padding-right: 2px;
   }
-  
+
   img {
     display: block;
-    width: 150px;
   }
   .price {
     color: #eb596e;

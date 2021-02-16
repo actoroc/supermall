@@ -1,12 +1,13 @@
 <template>
   <div class="goods-list">
-    <waterfall :col="2" :data="goods"  @finish="finish" >
+    <waterfall :col="2" :data="goods" @finish="finish">
       <template>
         <goods-list-item
           v-for="(item, index) in goods"
           :key="index"
           :goodsItem="item"
           class="home-goods"
+          :offsetWidth="offsetWidth"
         ></goods-list-item>
       </template>
     </waterfall>
@@ -21,7 +22,9 @@ export default {
     GoodsListItem,
   },
   data() {
-    return {};
+    return {
+      offsetWidth: 0,
+    };
   },
   props: {
     goods: {
@@ -30,15 +33,15 @@ export default {
         return [];
       },
     },
-    
+  },
+  mounted() {
+    this.offsetWidth = this.$el.offsetWidth - 20;
   },
   methods: {
-      finish(){
-        this.$emit('finish')
-      },
-   
+    finish() {
+      this.$emit("finish");
     },
-    
+  },
 };
 </script>
 
@@ -50,7 +53,7 @@ export default {
   padding: 0 2px;
   flex-direction: column;
 }
-.home-goods{
+.home-goods {
   margin: 0 4px 8px 4px;
   display: inline-block;
 }

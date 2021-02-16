@@ -21,7 +21,6 @@ Vue.use(toast);
 Vue.config.productionTip = false;
 
 //注册事件总线，解决跨多个组件通信
-Vue.prototype.$bus = new Vue();
 
 new Vue({
   router,

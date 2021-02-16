@@ -24,7 +24,6 @@ import TabControl from "components/content/tabcontrol/TabControl";
 import Scroll from "components/common/scroll/Scroll";
 import TabContentCategory from "./childComps/TabContentCategory";
 import TabContentDetail from "./childComps/TabContentDetail";
-import { debounce } from "common/utils";
 import {
   getCategory,
   getSubcategory,
@@ -54,10 +53,7 @@ export default {
     // 1.请求分类数据
     this._getCategory();
   },
-  mounted() {
-    this.newRefresh = debounce(this.$refs.scroll.refresh, 100);
-    this.$bus.$on("itemImgLoad", this.newRefresh);
-  },
+ 
   activated() {
     this.$refs.scroll.refresh();
   },
