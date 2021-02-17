@@ -15,7 +15,7 @@
       class="wrapper"
       :pullUpLoad="true"
       @pullingUp="pullup"
-      :probeType="3"
+      :probeType="0"
       ref="scroll"
       @scroll="isShowBackTopFun"
     >
@@ -33,8 +33,12 @@
         ref="goodsList"
         @finish="finish"
       />
+      <div class="refresh" v-show="isShowRefresh">
+        <mt-spinner type="snake"></mt-spinner>正在加载更多！
+      </div>
     </scroll>
     <back-top @click.native="backtop" v-show="isShowBackTop" />
+    <shade :show="isShade" />
   </div>
 </template>
 <script>
@@ -43,13 +47,13 @@ import recommendView from "./childitem/recommendView";
 
 import navBar from "components/common/navbar/navBar";
 import scroll from "components/common/scroll/Scroll";
+import Shade from "components/common/shade/Shade";
 
 import TabControl from "components/content/tabcontrol/TabControl";
 import GoodsList from "components/content/goods/GoodsList";
 
 import { getHomeMultiData, getHomeGoods } from "network/home";
 import { backTopMixin, tabControlMixin } from "common/mixin";
-
 
 export default {
   name: "home",
@@ -61,13 +65,14 @@ export default {
     /*common组件*/
     navBar,
     scroll,
+    Shade,
 
     /*content组件*/
     TabControl,
     GoodsList,
   },
   //混入
-  mixins: [ backTopMixin, tabControlMixin],
+  mixins: [backTopMixin, tabControlMixin],
   data() {
     return {
       banners: [],
@@ -87,9 +92,11 @@ export default {
         },
       },
       isLoaded: false,
+      isShowRefresh: false,
       tabcontrolShow: false,
       tabOffsetTop: 0,
       saveLocation: 0,
+      isShade: true,
       tabControlPosition: {
         pop: 0,
         new: 0,
@@ -104,7 +111,7 @@ export default {
     this.getHomeGoods("new");
     this.getHomeGoods("sell");
   },
- 
+
   methods: {
     /*网络请求*/
     getHomeMultiData() {
@@ -128,6 +135,8 @@ export default {
     //上拉加载更多
     pullup() {
       this.getHomeGoods(this.transmit);
+      this.isShowRefresh = true;
+  
     },
     //backTop是否显示
     isShowBackTopFun(position) {
@@ -142,8 +151,10 @@ export default {
         this.tabControlPosition[key] = -this.tabOffsetTop;
       }
     },
-    finish(){
+    finish() {
       this.$refs.scroll.refresh();
+      this.isShade = false;
+      this.isShowRefresh = false;
     },
     //根据index 请求对应的数据
     tabItemClick(index) {
@@ -217,6 +228,16 @@ export default {
   padding-top: 44px;
   height: 100vh;
 }
+.shade {
+  width: 100vw;
+  height: calc(100% - 49px - 44px);
+  background: rgba(0, 0, 0, 0.4);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: absolute;
+  z-index: 4;
+}
 .home-nav {
   background: #ee9595;
   font-size: 1.3rem;
@@ -236,5 +257,16 @@ export default {
 .goods-list {
   background: #f2f2f2;
   z-index: 4;
+}
+.refresh {
+  position: relative;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: #f2f2f2;
+  height: 44px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 </style>

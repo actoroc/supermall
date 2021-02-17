@@ -11,8 +11,13 @@
         <!-- :data="[categoryData]" -->
         <tab-content-category :subcategories="showSubcategory" />
         <tab-control :titles="['综合', '新品', '销量']" @tabClick="tabClick" />
-        <tab-content-detail :category-detail="showCategoryDetail" ref="contentDetail" @finish="finish"/>
+        <tab-content-detail
+          :category-detail="showCategoryDetail"
+          ref="contentDetail"
+          @finish="finish"
+        />
       </scroll>
+      <shade :show="isShade" />
     </div>
   </div>
 </template>
@@ -22,6 +27,7 @@ import NavBar from "components/common/navbar/navBar";
 import TabMenu from "./childComps/TabMenu";
 import TabControl from "components/content/tabcontrol/TabControl";
 import Scroll from "components/common/scroll/Scroll";
+import Shade from "components/common/shade/Shade";
 import TabContentCategory from "./childComps/TabContentCategory";
 import TabContentDetail from "./childComps/TabContentDetail";
 import {
@@ -37,6 +43,7 @@ export default {
     TabMenu,
     TabControl,
     Scroll,
+    Shade,
     TabContentCategory,
     TabContentDetail,
   },
@@ -47,13 +54,14 @@ export default {
       categoryData: {},
       currentIndex: -1,
       newRefresh: null,
+      isShade: true,
     };
   },
   created() {
     // 1.请求分类数据
     this._getCategory();
   },
- 
+
   activated() {
     this.$refs.scroll.refresh();
   },
@@ -68,8 +76,9 @@ export default {
     },
   },
   methods: {
-    finish(){
+    finish() {
       this.$refs.scroll.refresh();
+      this.isShade = false;
     },
     _getCategory() {
       getCategory().then((res) => {
@@ -88,7 +97,6 @@ export default {
         }
         // 3.请求第一个分类的数据
         this._getSubcategories(0);
-      
       });
     },
     _getSubcategories(index) {

@@ -18,11 +18,13 @@
     </scroll>
     <detail-bottom-bar class="bottom-bar" @cartClick="cartClick" />
     <back-top @click.native="backtop" v-show="isShowBackTop" />
+    <shade :show="isShade" />
   </div>
 </template>
 
 <script>
 import scroll from "components/common/scroll/Scroll";
+import Shade from "components/common/shade/Shade";
 import GoodsList from "components/content/goods/GoodsList";
 
 import detailNavBar from "./childitem/detailNavBar";
@@ -42,6 +44,7 @@ export default {
   name: "Detail",
   components: {
     scroll,
+    Shade,
     GoodsList,
 
     detailNavBar,
@@ -67,7 +70,8 @@ export default {
       teemeTopYsFun: null,
       currentIndex: 0,
       promotions: "",
-      offsetWidth:0,
+      offsetWidth: 0,
+      isShade: true,
     };
   },
   //混入backTop组件和图片加载重新计算scroll的可滚动高度
@@ -125,6 +129,7 @@ export default {
     },
     finish() {
       this.$refs.scroll.refresh();
+      this.isShade = false;
     },
     //点击顶部标题滚动到对应的高度
     titleClick(index) {

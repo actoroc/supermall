@@ -27,17 +27,13 @@ export default {
       type: Boolean,
       default: true,
     },
-    /**
-     * 是否开启横向滚动
+
+    /* 是否开启横向滚动
      */
     // PullUp:{
     //   type: Boolean,
     //   dafault: true,
     // }
-    pullUpLoad: {
-      type: Boolean,
-      dafault: false,
-    },
   },
   mounted() {
     // 保证在DOM渲染完毕后初始化better-scroll
@@ -54,9 +50,13 @@ export default {
       this.scroll = new BScroll(this.$refs.wrapper, {
         probeType: this.probeType,
         click: this.click,
-        pullUpLoad: this.pullUpLoad,
-        // momentum:false,
-        useTransition:false,
+        pullUpLoad: {
+          threshold: 200,
+        },
+        useTransition: false,
+        bounce: {
+          bottom: false,
+        },
       });
 
       // 是否监听浏览器滚动
@@ -65,13 +65,14 @@ export default {
           this.$emit("scroll", position);
         });
       }
-
+      this.scroll.on("scrollEnd", () => {
+        console.log("滚动结束");
+      });
       //是否启动上拉事件
-      if (this.pullUpLoad) {
-        this.scroll.on("pullingUp", () => {
-          this.$emit("pullingUp");
-        });
-      }
+
+      this.scroll.on("pullingUp", () => {
+        this.$emit("pullingUp");
+      });
     },
 
     refresh() {
