@@ -15,7 +15,7 @@
       class="wrapper"
       :pullUpLoad="true"
       @pullingUp="pullup"
-      :probeType="0"
+      :probeType="3"
       ref="scroll"
       @scroll="isShowBackTopFun"
     >
