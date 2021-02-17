@@ -1,6 +1,6 @@
 <template>
   <div class="goods-list">
-    <waterfall :col="2" :data="goods" @finish="finish" >
+    <waterfall :col="2" :data="goods"  @finish="finish" >
       <template>
         <goods-list-item
           v-for="(item, index) in goods"
@@ -41,6 +41,7 @@ export default {
     finish() {
       this.$emit("finish");
     },
+   
   },
 };
 </script>

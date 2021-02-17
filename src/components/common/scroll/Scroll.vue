@@ -51,9 +51,9 @@ export default {
         probeType: this.probeType,
         click: this.click,
         pullUpLoad: {
-          threshold: 200,
+          threshold: 50,
         },
-        useTransition: false,
+        // useTransition: false,
         bounce: {
           bottom: false,
         },
@@ -65,9 +65,7 @@ export default {
           this.$emit("scroll", position);
         });
       }
-      this.scroll.on("scrollEnd", () => {
-        console.log("滚动结束");
-      });
+      this.scroll.on("scrollEnd", () => {});
       //是否启动上拉事件
 
       this.scroll.on("pullingUp", () => {

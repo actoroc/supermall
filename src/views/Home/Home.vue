@@ -34,7 +34,7 @@
         @finish="finish"
       />
       <div class="refresh" v-show="isShowRefresh">
-        <mt-spinner type="snake"></mt-spinner>正在加载更多！
+        <mt-spinner type="snake" />
       </div>
     </scroll>
     <back-top @click.native="backtop" v-show="isShowBackTop" />
@@ -136,7 +136,6 @@ export default {
     pullup() {
       this.getHomeGoods(this.transmit);
       this.isShowRefresh = true;
-  
     },
     //backTop是否显示
     isShowBackTopFun(position) {
