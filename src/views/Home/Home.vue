@@ -125,9 +125,8 @@ export default {
       getHomeGoods(type, page).then((res) => {
         this.goods[type].list.push(...res.data.list);
         this.goods[type].page += 1;
-        setTimeout(() => {
-          this.$refs.scroll.finishPullUp();
-        }, 2000);
+
+        this.$refs.scroll.finishPullUp();
       });
     },
     /*事件监听*/
@@ -258,7 +257,7 @@ export default {
   z-index: 4;
 }
 .refresh {
-  position: relative;
+  position: absolute;
   left: 0;
   right: 0;
   bottom: 0;

@@ -53,7 +53,7 @@ export default {
         pullUpLoad: {
           threshold: 50,
         },
-        // useTransition: false,
+        useTransition: false,
         bounce: {
           bottom: false,
         },
@@ -69,6 +69,7 @@ export default {
       //是否启动上拉事件
 
       this.scroll.on("pullingUp", () => {
+  
         this.$emit("pullingUp");
       });
     },
