@@ -13,7 +13,6 @@
     />
     <scroll
       class="wrapper"
-      :pullUpLoad="true"
       @pullingUp="pullup"
       :probeType="3"
       ref="scroll"
