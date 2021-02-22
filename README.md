@@ -1,9 +1,8 @@
 # 项目预览
 
-```
+
 建议控制台切换手机设备预览
- http://actoroc.gitee.io/my-supermall 
-```
+[http://actoroc.gitee.io/my-supermall](http://actoroc.gitee.io/my-supermall)
 ## Project setup
 ```
 npm install
