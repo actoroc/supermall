@@ -1,7 +1,7 @@
-# supermall
+# 项目预览
 
 ```
-用vue尝试做一个购物app
+http://actoroc.gitee.io/my-supermall
 ```
 ## Project setup
 ```
